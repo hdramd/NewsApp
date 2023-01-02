@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "NewsApp.Infra.Data.Sql.Commands": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:60516;http://localhost:60520"
+    }
+  }
+}

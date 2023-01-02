@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "NewsApp.Core.Contracts": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:60515;http://localhost:60521"
+    }
+  }
+}

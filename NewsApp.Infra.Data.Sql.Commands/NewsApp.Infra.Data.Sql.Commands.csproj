@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Zamin.Extensions.Events.Outbox.Dal.EF" Version="7.0.0-beta.1" />
+    <PackageReference Include="Zamin.Infra.Data.Sql.Commands" Version="7.0.0-beta.1" />
+    <PackageReference Include="Zamin.Utilities.SerilogRegistration" Version="7.0.0-beta.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NewsApp.Core.Contracts\NewsApp.Core.Contracts.csproj" />
+    <ProjectReference Include="..\NewsApp.Core.Domain\NewsApp.Core.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
