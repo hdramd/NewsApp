@@ -1,5 +1,4 @@
-﻿using NewsApp.Core.Domain.News.Entities;
-using Zamin.Core.Domain.Entities;
+﻿using Zamin.Core.Domain.Entities;
 
 namespace NewsApp.Core.Domain.Images.Entities
 {
@@ -7,7 +6,6 @@ namespace NewsApp.Core.Domain.Images.Entities
     {
         #region Props
         public string Path { get; private set; }
-        public virtual ICollection<NewsImageMapping> NewsImageMappings { get; private set; }
         #endregion
 
         #region Ctor

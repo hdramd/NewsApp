@@ -1,5 +1,4 @@
-﻿using NewsApp.Core.Domain.News.Entities;
-using Zamin.Core.Domain.Entities;
+﻿using Zamin.Core.Domain.Entities;
 
 namespace NewsApp.Core.Domain.Categories.Entities
 {
@@ -7,7 +6,6 @@ namespace NewsApp.Core.Domain.Categories.Entities
 	{
 		#region Props
 		public string Name { get; private set; }
-		public virtual ICollection<NewsCategoryMapping> NewsCategoryMappings { get; private set; }
 		#endregion
 
 		#region Ctor

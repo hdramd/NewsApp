@@ -17,12 +17,18 @@ namespace NewsApp.Core.Domain.News.Entities
 
 		}
 
-		public News(string titr, long[] categoryIds)
+		public News(string titr, long[] categoryIds, long[] imageIds)
 		{
 			Titr = titr;
+
 			NewsCategoryMappings = categoryIds.Select(catId => new NewsCategoryMapping
 			{
 				CategoryId = catId
+			}).ToList();
+
+			NewsImageMappings = imageIds.Select(imgId => new NewsImageMapping
+			{
+				ImageId = imgId
 			}).ToList();
 
 			AddEvent(new NewsCreated(BusinessId.Value.ToString(), titr, categoryIds.ToArray()));
@@ -30,15 +36,21 @@ namespace NewsApp.Core.Domain.News.Entities
 		#endregion
 
 		#region Commands
-		public static News Create(string titr, long[] categoryIds) => new(titr, categoryIds);
+		public static News Create(string titr, long[] categoryIds, long[] imageIds)
+			=> new(titr, categoryIds, imageIds);
 
-		public void Update(string titr, List<long> categoryIds)
+		public void Update(string titr, long[] categoryIds, long[] imageIds)
 		{
 			Titr = titr;
 
 			NewsCategoryMappings = categoryIds.Select(catId => new NewsCategoryMapping
 			{
 				CategoryId = catId
+			}).ToList();
+
+			NewsImageMappings = imageIds.Select(imgId => new NewsImageMapping
+			{
+				ImageId = imgId
 			}).ToList();
 		}
 		#endregion

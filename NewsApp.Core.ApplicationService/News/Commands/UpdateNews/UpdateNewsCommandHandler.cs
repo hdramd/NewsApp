@@ -24,7 +24,7 @@ namespace NewsApp.Core.ApplicationService.News.Commands.UpdateNews
 			if (news is null)
 				return await ResultAsync(command.Id, ApplicationServiceStatus.NotFound);
 
-			news.Update(command.Titr, command.CategoryIds.ToList());
+			news.Update(command.Titr, command.CategoryIds, command.ImageIds);
 			await _newsCommandRepository.CommitAsync();
 			return Ok(news.Id);
 		}

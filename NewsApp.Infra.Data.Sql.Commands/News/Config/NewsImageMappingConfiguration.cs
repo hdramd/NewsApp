@@ -4,18 +4,18 @@ using NewsApp.Core.Domain.News.Entities;
 
 namespace NewsApp.Infra.Data.Sql.Commands.News.Config
 {
-	public class NewsCategoryMappingConfiguration : IEntityTypeConfiguration<NewsCategoryMapping>
+	public class NewsImageMappingConfiguration : IEntityTypeConfiguration<NewsImageMapping>
 	{
-		public void Configure(EntityTypeBuilder<NewsCategoryMapping> builder)
+		public void Configure(EntityTypeBuilder<NewsImageMapping> builder)
 		{
 			builder.Property(x => x.NewsId)
-				 .IsRequired();
+				.IsRequired();
 
-			builder.Property(x => x.CategoryId)
+			builder.Property(x => x.ImageId)
 				 .IsRequired();
 
 			builder.HasOne(x => x.News)
-				.WithMany(x => x.NewsCategoryMappings).HasForeignKey(x => x.NewsId)
+				.WithMany(x => x.NewsImageMappings).HasForeignKey(x => x.NewsId)
 				.OnDelete(DeleteBehavior.Cascade);
 		}
 	}
