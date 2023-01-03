@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NewsApp.Core.Domain.Categories.Entities;
+using NewsApp.Core.Domain.Images.Entities;
 using System.Reflection;
 using Zamin.Extensions.Events.Outbox.Dal.EF;
 using Entities = NewsApp.Core.Domain.News.Entities;
@@ -11,6 +12,7 @@ namespace NewsApp.Infra.Data.Sql.Commands.Common
         #region DbSet
         public DbSet<Entities.News> News { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Image> Images { get; set; }
         #endregion
 
         #region Ctor
