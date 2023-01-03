@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Categories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Zamin.Infra.Data.Sql.Queries" Version="6.4.0-beta.2" />
   </ItemGroup>
 

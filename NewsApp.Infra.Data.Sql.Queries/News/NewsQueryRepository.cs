@@ -15,13 +15,13 @@ namespace NewsApp.Infra.Data.Sql.Queries.News
 		{
 		}
 
-		public async Task<NewsDto> GetByIdAsync(GetNewsByBusinessIdQuery query)
+		public async Task<NewsDto> GetByIdAsync(GetNewsByIdQuery query)
 			=> await _dbContext.News.Select(c => new NewsDto()
 			{
 				Id = c.Id,
 				BusinessId = c.BusinessId,
 				Titr = c.Titr
-			}).FirstOrDefaultAsync(c => c.BusinessId.Equals(query.BlogBusinessId));
+			}).FirstOrDefaultAsync(c => c.Id.Equals(query.Id));
 
 		public async Task<PagedData<NewsDto>> GetByCategoryIdPagedListAsync(GetByCategoryIdPagedListQuery query)
 		{

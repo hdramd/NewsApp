@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Categories\Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Zamin.Core.ApplicationServices" Version="7.0.0-beta.1" />
     <PackageReference Include="Zamin.Core.Domain.Toolkits" Version="7.0.0-beta.1" />
   </ItemGroup>

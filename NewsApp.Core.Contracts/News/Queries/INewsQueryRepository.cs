@@ -7,7 +7,7 @@ namespace NewsApp.Core.Contracts.News.Queries
 {
 	public interface INewsQueryRepository
 	{
-		Task<NewsDto> GetByIdAsync(GetNewsByBusinessIdQuery query);
+		Task<NewsDto> GetByIdAsync(GetNewsByIdQuery query);
 		Task<PagedData<NewsDto>> GetByCategoryIdPagedListAsync(GetByCategoryIdPagedListQuery query);
 	}
 }

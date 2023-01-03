@@ -7,7 +7,7 @@ using Zamin.Utilities;
 
 namespace NewsApp.Core.ApplicationService.News.Queries.GetNewsByBusinessId
 {
-	public class GetNewsByBusinessIdHandler : QueryHandler<GetNewsByBusinessIdQuery, NewsDto>
+	public class GetNewsByBusinessIdHandler : QueryHandler<GetNewsByIdQuery, NewsDto>
 	{
 		private readonly INewsQueryRepository _newsQueryRepository;
 
@@ -17,7 +17,7 @@ namespace NewsApp.Core.ApplicationService.News.Queries.GetNewsByBusinessId
 			_newsQueryRepository = newsQueryRepository;
 		}
 
-		public override async Task<QueryResult<NewsDto>> Handle(GetNewsByBusinessIdQuery query)
+		public override async Task<QueryResult<NewsDto>> Handle(GetNewsByIdQuery query)
 			=> Result(await _newsQueryRepository.GetByIdAsync(query));
 
 	}
