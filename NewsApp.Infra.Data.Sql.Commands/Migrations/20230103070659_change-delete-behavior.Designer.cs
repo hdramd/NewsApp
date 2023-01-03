@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewsApp.Infra.Data.Sql.Commands.Common;
 
@@ -11,9 +12,11 @@ using NewsApp.Infra.Data.Sql.Commands.Common;
 namespace NewsApp.Infra.Data.Sql.Commands.Migrations
 {
     [DbContext(typeof(NewsAppCommandDbContext))]
-    partial class NewsAppCommandDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230103070659_change-delete-behavior")]
+    partial class changedeletebehavior
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

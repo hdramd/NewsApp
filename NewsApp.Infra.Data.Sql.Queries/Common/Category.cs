@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace NewsApp.Infra.Data.Sql.Queries.Common;
 
-public partial class News
+public partial class Category
 {
     public long Id { get; set; }
 
-    public string Titr { get; set; }
+    public string Name { get; set; }
 
     public string CreatedByUserId { get; set; }
 

@@ -37,7 +37,7 @@ namespace NewsApp.Endpoints.Api
             builder.Services.AddZaminInMemoryCaching();
 
             builder.Services.AddDbContext<NewsAppCommandDbContext>(c => c.UseSqlServer(cnn).AddInterceptors(new SetPersianYeKeInterceptor(), new AddAuditDataInterceptor()));
-            builder.Services.AddDbContext<NewAppQueryDbContext>(c => c.UseSqlServer(cnn));
+            builder.Services.AddDbContext<NewsAppQueryDbContext>(c => c.UseSqlServer(cnn));
 
             builder.Services.AddZaminApiCore("Zamin", "MiniBlog");
             builder.Services.AddControllers();

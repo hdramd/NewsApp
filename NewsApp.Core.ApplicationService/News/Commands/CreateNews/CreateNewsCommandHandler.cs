@@ -5,7 +5,7 @@ using Zamin.Core.Contracts.ApplicationServices.Commands;
 using Zamin.Utilities;
 using Entities = NewsApp.Core.Domain.News.Entities;
 
-namespace NewsApp.Core.ApplicationService.News.Commands
+namespace NewsApp.Core.ApplicationService.News.Commands.CreateNews
 {
     public class CreateNewsCommandHandler : CommandHandler<CreateNewsCommand, Guid>
     {
@@ -18,7 +18,7 @@ namespace NewsApp.Core.ApplicationService.News.Commands
 
         public override async Task<CommandResult<Guid>> Handle(CreateNewsCommand command)
         {
-            Entities.News news = Entities.News.Create(command.Titr, command.CategoryIds.ToList());
+            Entities.News news = Entities.News.Create(command.Titr, command.CategoryIds);
             await _newsCommandRepository.InsertAsync(news);
             await _newsCommandRepository.CommitAsync();
             return Ok(news.BusinessId.Value);

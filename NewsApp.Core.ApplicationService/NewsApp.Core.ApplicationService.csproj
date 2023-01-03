@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Categories\Queries\" />
-    <Folder Include="News\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

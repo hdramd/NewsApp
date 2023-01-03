@@ -3,16 +3,19 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Categories\" />
-    <Folder Include="News\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Zamin.Infra.Data.Sql.Queries" Version="6.4.0-beta.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NewsApp.Core.Contracts\NewsApp.Core.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
