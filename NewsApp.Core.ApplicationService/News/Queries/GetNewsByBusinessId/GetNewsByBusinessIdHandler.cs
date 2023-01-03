@@ -12,14 +12,13 @@ namespace NewsApp.Core.ApplicationService.News.Queries.GetNewsByBusinessId
 		private readonly INewsQueryRepository _newsQueryRepository;
 
 		public GetNewsByBusinessIdHandler(ZaminServices zaminServices,
-										  INewsQueryRepository newsQueryRepository) : base(zaminServices)
+			INewsQueryRepository newsQueryRepository) : base(zaminServices)
 		{
 			_newsQueryRepository = newsQueryRepository;
 		}
 
 		public override async Task<QueryResult<NewsDto>> Handle(GetNewsByBusinessIdQuery query)
-		{
-			return Result(await _newsQueryRepository.Execute(query));
-		}
+			=> Result(await _newsQueryRepository.GetByIdAsync(query));
+
 	}
 }

@@ -1,10 +1,13 @@
-﻿using NewsApp.Core.Contracts.News.Queries.GetNewsByBusinessId;
+﻿using NewsApp.Core.Contracts.News.Queries.GetByCategoryIdPagedList;
+using NewsApp.Core.Contracts.News.Queries.GetNewsByBusinessId;
 using NewsApp.Core.Contracts.News.Queries.Models;
+using Zamin.Core.Contracts.Data.Queries;
 
 namespace NewsApp.Core.Contracts.News.Queries
 {
 	public interface INewsQueryRepository
 	{
-		public Task<NewsDto> Execute(GetNewsByBusinessIdQuery query);
+		Task<NewsDto> GetByIdAsync(GetNewsByBusinessIdQuery query);
+		Task<PagedData<NewsDto>> GetByCategoryIdPagedListAsync(GetByCategoryIdPagedListQuery query);
 	}
 }
