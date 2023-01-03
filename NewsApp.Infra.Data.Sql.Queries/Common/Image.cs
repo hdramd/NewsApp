@@ -3,13 +3,11 @@ using System.Collections.Generic;
 
 namespace NewsApp.Infra.Data.Sql.Queries.Common;
 
-public partial class NewsCategoryMapping
+public partial class Image
 {
     public long Id { get; set; }
 
-    public long NewsId { get; set; }
-
-    public long CategoryId { get; set; }
+    public string Path { get; set; }
 
     public string CreatedByUserId { get; set; }
 
@@ -20,6 +18,4 @@ public partial class NewsCategoryMapping
     public DateTime? ModifiedDateTime { get; set; }
 
     public Guid BusinessId { get; set; }
-
-    public virtual News News { get; set; }
 }

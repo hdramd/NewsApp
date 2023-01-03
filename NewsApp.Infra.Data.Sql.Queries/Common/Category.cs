@@ -18,6 +18,4 @@ public partial class Category
     public DateTime? ModifiedDateTime { get; set; }
 
     public Guid BusinessId { get; set; }
-
-    public virtual ICollection<NewsCategoryMapping> NewsCategoryMappings { get; } = new List<NewsCategoryMapping>();
 }

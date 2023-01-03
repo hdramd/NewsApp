@@ -20,4 +20,6 @@ public partial class News
     public Guid BusinessId { get; set; }
 
     public virtual ICollection<NewsCategoryMapping> NewsCategoryMappings { get; } = new List<NewsCategoryMapping>();
+
+    public virtual ICollection<NewsImageMapping> NewsImageMappings { get; } = new List<NewsImageMapping>();
 }

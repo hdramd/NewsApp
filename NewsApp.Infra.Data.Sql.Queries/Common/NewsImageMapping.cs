@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace NewsApp.Infra.Data.Sql.Queries.Common;
 
-public partial class NewsCategoryMapping
+public partial class NewsImageMapping
 {
     public long Id { get; set; }
 
     public long NewsId { get; set; }
 
-    public long CategoryId { get; set; }
+    public long ImageId { get; set; }
 
     public string CreatedByUserId { get; set; }
 
