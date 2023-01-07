@@ -9,5 +9,6 @@ namespace NewsApp.Core.Contracts.News.Queries
 	{
 		Task<NewsDto> GetByIdAsync(GetNewsByIdQuery query);
 		Task<PagedData<NewsDto>> GetByCategoryIdPagedListAsync(GetByCategoryIdPagedListQuery query);
+		Task<NewsDto> GetByTitrAsync(string titr);
 	}
 }

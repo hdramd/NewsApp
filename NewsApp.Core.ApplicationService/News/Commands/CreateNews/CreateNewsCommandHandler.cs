@@ -18,7 +18,8 @@ namespace NewsApp.Core.ApplicationService.News.Commands.CreateNews
 
 		public override async Task<CommandResult<Guid>> Handle(CreateNewsCommand command)
 		{
-			Entities.News news = Entities.News.Create(command.Titr, command.CategoryIds, command.ImageIds);
+			Entities.News news = Entities.News.Create(command.Titr, 
+				command.CategoryIds, command.ImageIds);
 			await _newsCommandRepository.InsertAsync(news);
 			await _newsCommandRepository.CommitAsync();
 			return Ok(news.BusinessId.Value);

@@ -144,6 +144,12 @@ namespace NewsApp.Infra.Data.Sql.Commands.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_News_Titr",
+                table: "News",
+                column: "Titr",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_NewsCategoryMapping_NewsId",
                 table: "NewsCategoryMapping",
                 column: "NewsId");

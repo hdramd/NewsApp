@@ -10,6 +10,9 @@ namespace NewsApp.Infra.Data.Sql.Commands.News.Config
         {
             builder.Property(x => x.Titr)
                 .IsRequired().HasMaxLength(200);
+
+            builder.HasIndex(x => x.Titr)
+                .IsUnique();
         }
     }
 }

@@ -124,6 +124,9 @@ namespace NewsApp.Infra.Data.Sql.Commands.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Titr")
+                        .IsUnique();
+
                     b.ToTable("News");
                 });
 

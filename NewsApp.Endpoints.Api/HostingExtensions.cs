@@ -29,7 +29,7 @@ namespace NewsApp.Endpoints.Api
 
             builder.Services.AddZaminAutoMapperProfiles(option =>
             {
-                option.AssmblyNamesForLoadProfiles = "MiniBlog";
+                option.AssmblyNamesForLoadProfiles = "NewsApp";
             });
 
             builder.Services.AddZaminMicrosoftSerializer();
@@ -39,14 +39,14 @@ namespace NewsApp.Endpoints.Api
             builder.Services.AddDbContext<NewsAppCommandDbContext>(c => c.UseSqlServer(cnn).AddInterceptors(new SetPersianYeKeInterceptor(), new AddAuditDataInterceptor()));
             builder.Services.AddDbContext<NewsAppQueryDbContext>(c => c.UseSqlServer(cnn));
 
-            builder.Services.AddZaminApiCore("Zamin", "MiniBlog");
+            builder.Services.AddZaminApiCore("Zamin", "NewsApp");
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
             builder.Services.AddZaminTraceJeager(c =>
             {
                 c.AgentHost = "localhost";
-                c.ApplicationName = "MiniBlog";
+                c.ApplicationName = "NewsApp";
                 c.ServiceName = "OpenTelemetrySample";
                 c.ServiceVersion = "1.0.0";
                 c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
@@ -55,14 +55,14 @@ namespace NewsApp.Endpoints.Api
             //builder.Services.AddZaminRabbitMqMessageBus(c =>
             //{
             //    c.PerssistMessage = false;
-            //    c.ExchangeName = "MiniBlogExchange";
-            //    c.ServiceName = "MiniBlogAPI";
+            //    c.ExchangeName = "NewsAppExchange";
+            //    c.ServiceName = "NewsAppAPI";
             //    c.Url = @"amqp://guest:guest@localhost:5672/";
             //});
 
             //builder.Services.AddZaminPollingPublisherDalSql(c =>
             //{
-            //    c.ApplicationName = "MiniBlog";
+            //    c.ApplicationName = "NewsAppp";
             //    c.ConnectionString = cnn;
             //});
 
@@ -71,13 +71,13 @@ namespace NewsApp.Endpoints.Api
             //    c.SendInterval = 1000;
             //    c.SendCount = 100;
             //    c.ExceptionInterval = 10000;
-            //    c.ApplicationName = "MiniBlog";
+            //    c.ApplicationName = "NewsApp";
             //});
 
 
             builder.Services.AddZaminMessageInbox(c =>
             {
-                c.ApplicationName = "MiniBlog";
+                c.ApplicationName = "NewsApp";
             });
 
             builder.Services.AddZaminMessageInboxDalSql(c =>

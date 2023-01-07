@@ -64,6 +64,15 @@ namespace NewsApp.Infra.Data.Sql.Queries.News
 				}).FirstOrDefault();
 		}
 
+		public async Task<NewsDto> GetByTitrAsync(string titr)
+			=> await _dbContext.News
+			.Select(x => new NewsDto
+			{
+				Id = x.Id,
+				BusinessId = x.BusinessId,
+				Titr = x.Titr
+			}).FirstOrDefaultAsync(x => x.Titr.Equals(titr));
+
 		public async Task<PagedData<NewsDto>> GetByCategoryIdPagedListAsync(GetByCategoryIdPagedListQuery query)
 		{
 			var newsQuery = _dbContext.NewsCategoryMappings

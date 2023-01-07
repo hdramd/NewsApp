@@ -12,7 +12,7 @@ using NewsApp.Infra.Data.Sql.Commands.Common;
 namespace NewsApp.Infra.Data.Sql.Commands.Migrations
 {
     [DbContext(typeof(NewsAppCommandDbContext))]
-    [Migration("20230103125300_Init")]
+    [Migration("20230107084845_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -126,6 +126,9 @@ namespace NewsApp.Infra.Data.Sql.Commands.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Titr")
+                        .IsUnique();
 
                     b.ToTable("News");
                 });
