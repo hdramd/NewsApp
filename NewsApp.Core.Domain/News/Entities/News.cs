@@ -21,15 +21,9 @@ namespace NewsApp.Core.Domain.News.Entities
 		{
 			Titr = titr;
 
-			NewsCategoryMappings = categoryIds.Select(catId => new NewsCategoryMapping
-			{
-				CategoryId = catId
-			}).ToList();
+			CreateNewsCategoryMapping(categoryIds);
 
-			NewsImageMappings = imageIds.Select(imgId => new NewsImageMapping
-			{
-				ImageId = imgId
-			}).ToList();
+			CreateNewsImageMapping(imageIds);
 
 			AddEvent(new NewsCreated(BusinessId.Value.ToString(), titr, categoryIds.ToArray()));
 		}
@@ -43,16 +37,18 @@ namespace NewsApp.Core.Domain.News.Entities
 		{
 			Titr = titr;
 
-			NewsCategoryMappings = categoryIds.Select(catId => new NewsCategoryMapping
-			{
-				CategoryId = catId
-			}).ToList();
+			CreateNewsCategoryMapping(categoryIds);
 
-			NewsImageMappings = imageIds.Select(imgId => new NewsImageMapping
-			{
-				ImageId = imgId
-			}).ToList();
+			CreateNewsImageMapping(imageIds);
 		}
+
+		private void CreateNewsImageMapping(long[] imageIds) 
+			=> NewsImageMappings = imageIds.Select(NewsImageMapping.Create).ToList();
+
+
+		private void CreateNewsCategoryMapping(long[] categoryIds) 
+			=> NewsCategoryMappings = categoryIds.Select(NewsCategoryMapping.Create).ToList();
+
 		#endregion
 	}
 }
