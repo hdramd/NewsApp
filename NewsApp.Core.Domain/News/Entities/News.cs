@@ -7,8 +7,8 @@ namespace NewsApp.Core.Domain.News.Entities
 	{
 		#region Props
 		public string Titr { get; private set; }
-		public virtual ICollection<NewsCategoryMapping> NewsCategoryMappings { get; private set; }
-		public virtual ICollection<NewsImageMapping> NewsImageMappings { get; private set; }
+		public virtual IReadOnlyCollection<NewsCategoryMapping> NewsCategoryMappings { get; private set; }
+		public virtual IReadOnlyCollection<NewsImageMapping> NewsImageMappings { get; private set; }
 		#endregion
 
 		#region Ctor
