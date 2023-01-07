@@ -23,6 +23,17 @@ namespace NewsApp.Infra.Data.Sql.Queries.Categories
 				Name = c.Name
 			}).FirstOrDefaultAsync(c => c.Id.Equals(query.Id));
 
+		public async Task<List<CategoryDto>> GetByIdAsync(List<long> ids)
+			=> await _dbContext.Categories
+				.Where(x => ids.Contains(x.Id))
+				.Select(x => new CategoryDto
+				{
+					Id = x.Id,
+					BusinessId = x.BusinessId,
+					Name = x.Name
+				}).ToListAsync();
+
+
 		public async Task<PagedData<CategoryDto>> GetPagedListAsync(GetCategoryPagedListQuery query)
 		{
 			var categoryQuery = _dbContext.Categories;

@@ -8,6 +8,7 @@ namespace NewsApp.Core.Contracts.Categories.Queries
     public interface ICategoryQueryRepository
     {
         Task<CategoryDto> GetByIdAsync(GetCategoryByIdQuery query);
+		Task<List<CategoryDto>> GetByIdAsync(List<long> ids);
 		Task<PagedData<CategoryDto>> GetPagedListAsync(GetCategoryPagedListQuery query);
 	}
 }
