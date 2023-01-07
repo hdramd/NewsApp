@@ -9,7 +9,7 @@ namespace NewsApp.Core.Contracts.News.Queries.Models
 		public Guid BusinessId { get; set; }
 		public string Titr { get; set; }
 
-		public List<CategoryDto> Categories { get; set; }
+		public string[] Categories { get; set; }
 		public List<ImageDto> Images { get; set; }
 	}
 }

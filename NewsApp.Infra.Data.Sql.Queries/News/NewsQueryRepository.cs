@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NewsApp.Core.Contracts.Categories.Queries.GetCategoryById;
 using NewsApp.Core.Contracts.Categories.Queries.Models;
 using NewsApp.Core.Contracts.Images.Queries.Models;
 using NewsApp.Core.Contracts.News.Queries;
@@ -22,41 +23,36 @@ namespace NewsApp.Infra.Data.Sql.Queries.News
 			var categoryQuery = _dbContext.Categories;
 			var imageQuery = _dbContext.Images;
 
-			var newsQuery = _dbContext.News
-				.Include(x => x.NewsCategoryMappings)
-				.Include(x => x.NewsImageMappings)
-				.Select(x => new
-				{
-					x.Id,
-					x.BusinessId,
-					x.Titr,
-					CategoryIds = x.NewsCategoryMappings.Select(c => c.CategoryId),
-					ImageIds = x.NewsImageMappings.Select(c => c.ImageId)
-				});
+			var newsCategoryQuery = _dbContext.NewsCategoryMappings
+				.Join(categoryQuery, x => x.CategoryId, y => y.Id,
+					(temp, cat) => new
+					{
+						temp.NewsId,
+						CategoryName = cat.Name
+					});
 
-			var finalQuery = from news in newsQuery
-							 let categories = categoryQuery.Where(x => news.CategoryIds.Contains(x.Id)).ToList()
-							 let images = imageQuery.Where(x => news.CategoryIds.Contains(x.Id)).ToList()
-							 select new NewsDto
+			var finalQuery = from news in _dbContext.News
+							 join category in newsCategoryQuery on news.Id equals category.NewsId into newsCategories
+							 from newsCategory in newsCategories.DefaultIfEmpty()
+							 select new
 							 {
-								 Id = news.Id,
-								 BusinessId = news.BusinessId,
-								 Titr = news.Titr,
-								 Categories = categories.Select(x => new CategoryDto
-								 {
-									 Id = x.Id,
-									 BusinessId = news.BusinessId,
-									 Name = x.Name
-								 }).ToList(),
-								 Images = images.Select(x => new ImageDto
-								 {
-									 Id = x.Id,
-									 BusinessId = x.BusinessId,
-									 Path = x.Path
-								 }).ToList()
+								 news.Id,
+								 news.BusinessId,
+								 news.Titr,
+								 newsCategory.CategoryName
 							 };
 
-			return await finalQuery.FirstOrDefaultAsync(c => c.Id.Equals(query.Id));
+			var result = await finalQuery.Where(x => x.Id.Equals(query.Id))
+				.ToListAsync();
+
+			return result.GroupBy(x => x.Id)
+				.Select(x => new NewsDto
+				{
+					Id = x.Key,
+					BusinessId = x.First().BusinessId,
+					Titr = x.First().Titr,
+					Categories = x.Select(c => c.CategoryName).ToArray()
+				}).FirstOrDefault();
 		}
 
 		public async Task<PagedData<NewsDto>> GetByCategoryIdPagedListAsync(GetByCategoryIdPagedListQuery query)
