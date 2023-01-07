@@ -10,6 +10,6 @@ namespace NewsApp.Core.Contracts.News.Queries.Models
 		public string Titr { get; set; }
 
 		public string[] Categories { get; set; }
-		public List<ImageDto> Images { get; set; }
+		public string[] Images { get; set; }
 	}
 }

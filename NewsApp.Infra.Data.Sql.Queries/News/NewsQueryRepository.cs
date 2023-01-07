@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NewsApp.Core.Contracts.Categories.Queries.GetCategoryById;
-using NewsApp.Core.Contracts.Categories.Queries.Models;
-using NewsApp.Core.Contracts.Images.Queries.Models;
 using NewsApp.Core.Contracts.News.Queries;
 using NewsApp.Core.Contracts.News.Queries.GetByCategoryIdPagedList;
 using NewsApp.Core.Contracts.News.Queries.GetNewsByBusinessId;
@@ -23,6 +20,14 @@ namespace NewsApp.Infra.Data.Sql.Queries.News
 			var categoryQuery = _dbContext.Categories;
 			var imageQuery = _dbContext.Images;
 
+			var newsImageQuery = _dbContext.NewsImageMappings
+				.Join(imageQuery, x => x.ImageId, y => y.Id,
+				(temp, image) => new
+				{
+					temp.NewsId,
+					ImagePath = image.Path
+				});
+
 			var newsCategoryQuery = _dbContext.NewsCategoryMappings
 				.Join(categoryQuery, x => x.CategoryId, y => y.Id,
 					(temp, cat) => new
@@ -34,11 +39,14 @@ namespace NewsApp.Infra.Data.Sql.Queries.News
 			var finalQuery = from news in _dbContext.News
 							 join category in newsCategoryQuery on news.Id equals category.NewsId into newsCategories
 							 from newsCategory in newsCategories.DefaultIfEmpty()
+							 join image in newsImageQuery on news.Id equals image.NewsId into newsImages
+							 from newsImage in newsImages.DefaultIfEmpty()
 							 select new
 							 {
 								 news.Id,
 								 news.BusinessId,
 								 news.Titr,
+								 newsImage.ImagePath,
 								 newsCategory.CategoryName
 							 };
 
@@ -51,6 +59,7 @@ namespace NewsApp.Infra.Data.Sql.Queries.News
 					Id = x.Key,
 					BusinessId = x.First().BusinessId,
 					Titr = x.First().Titr,
+					Images = x.Select(x => x.ImagePath).ToArray(),
 					Categories = x.Select(c => c.CategoryName).ToArray()
 				}).FirstOrDefault();
 		}
