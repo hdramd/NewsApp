@@ -37,10 +37,10 @@ namespace NewsApp.Infra.Data.Sql.Queries.News
 					});
 
 			var finalQuery = from news in _dbContext.News
-							 join category in newsCategoryQuery on news.Id equals category.NewsId into newsCategories
-							 from newsCategory in newsCategories.DefaultIfEmpty()
 							 join image in newsImageQuery on news.Id equals image.NewsId into newsImages
 							 from newsImage in newsImages.DefaultIfEmpty()
+							 join category in newsCategoryQuery on news.Id equals category.NewsId into newsCategories
+							 from newsCategory in newsCategories.DefaultIfEmpty()
 							 select new
 							 {
 								 news.Id,
