@@ -45,7 +45,6 @@ namespace NewsApp.Core.Domain.News.Entities
 		private void CreateNewsImageMapping(long[] imageIds) 
 			=> NewsImageMappings = imageIds.Select(NewsImageMapping.Create).ToList();
 
-
 		private void CreateNewsCategoryMapping(long[] categoryIds) 
 			=> NewsCategoryMappings = categoryIds.Select(NewsCategoryMapping.Create).ToList();
 
