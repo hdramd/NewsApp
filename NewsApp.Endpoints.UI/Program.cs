@@ -7,6 +7,6 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddEmployeeConfig();
+builder.Services.AddCategoryConfig();
 
 await builder.Build().RunAsync();

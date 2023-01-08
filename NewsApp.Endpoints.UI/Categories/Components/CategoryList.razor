@@ -1,12 +1,15 @@
-﻿@page "/categories"
+﻿@page "/category"
 @inject ICategoryService EmployeeService
+@inject Microsoft.AspNetCore.Components.NavigationManager navigation
+
 
 <PageTitle>Category list</PageTitle>
 
 <h1>Category list</h1>
 
 <p>This component demonstrates the list of categories</p>
-
+<button class="btn btn-primary" @onclick="@(() => navigation.NavigateTo("/category/create"))">Create</button>
+<hr />
 @if (pagedData == null)
 {
     <p><em>Loading...</em></p>
@@ -35,17 +38,3 @@ else
     </table>
 }
 
-@code {
-    private PagedData<CategoryDto> pagedData;
-    private string error;
-
-    protected override async Task OnInitializedAsync()
-    {
-        await LoadDataAsync();
-    }
-
-    private async Task LoadDataAsync()
-    {
-        pagedData = await EmployeeService.GetPagedListAsync();
-    }
-}

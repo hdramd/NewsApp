@@ -7,7 +7,7 @@ namespace NewsApp.Endpoints.UI.Categories.Config
     {
         private const string BaseUrl = "http://localhost:5000/api/Category";
 
-        public static IServiceCollection AddEmployeeConfig(this IServiceCollection services)
+        public static IServiceCollection AddCategoryConfig(this IServiceCollection services)
         {
             services.AddScoped<ICategoryService, CategoryService>();
 
