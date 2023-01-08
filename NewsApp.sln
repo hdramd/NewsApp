@@ -21,7 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsApp.Infra.Data.Sql.Comm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsApp.Endpoints.Api", "NewsApp.Endpoints.Api\NewsApp.Endpoints.Api.csproj", "{6B93A285-283C-4CB4-BBB7-3EE1B7BD71A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsApp.Infra.Data.Sql.Queries", "NewsApp.Infra.Data.Sql.Queries\NewsApp.Infra.Data.Sql.Queries.csproj", "{1DA78152-C6E3-4F85-82F3-E808A1699961}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsApp.Infra.Data.Sql.Queries", "NewsApp.Infra.Data.Sql.Queries\NewsApp.Infra.Data.Sql.Queries.csproj", "{1DA78152-C6E3-4F85-82F3-E808A1699961}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsApp.Endpoints.UI", "NewsApp.Endpoints.UI\NewsApp.Endpoints.UI.csproj", "{2FF08B41-FB38-4A0A-B873-308B7FBC45AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsApp.Endpoints.Shared", "NewsApp.Endpoints.Shared\NewsApp.Endpoints.Shared.csproj", "{2A9730BC-0F53-40D7-B247-2180CE71D1FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,14 @@ Global
 		{1DA78152-C6E3-4F85-82F3-E808A1699961}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DA78152-C6E3-4F85-82F3-E808A1699961}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DA78152-C6E3-4F85-82F3-E808A1699961}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FF08B41-FB38-4A0A-B873-308B7FBC45AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF08B41-FB38-4A0A-B873-308B7FBC45AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF08B41-FB38-4A0A-B873-308B7FBC45AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF08B41-FB38-4A0A-B873-308B7FBC45AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A9730BC-0F53-40D7-B247-2180CE71D1FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A9730BC-0F53-40D7-B247-2180CE71D1FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A9730BC-0F53-40D7-B247-2180CE71D1FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A9730BC-0F53-40D7-B247-2180CE71D1FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +77,8 @@ Global
 		{6F5B66CC-F453-4EF2-ABA4-86CC07C7457D} = {2D335423-3038-4DB3-BF98-12E5510C3758}
 		{6B93A285-283C-4CB4-BBB7-3EE1B7BD71A1} = {115F8AA7-8D4C-456D-A659-31C0E614A87F}
 		{1DA78152-C6E3-4F85-82F3-E808A1699961} = {2D335423-3038-4DB3-BF98-12E5510C3758}
+		{2FF08B41-FB38-4A0A-B873-308B7FBC45AE} = {115F8AA7-8D4C-456D-A659-31C0E614A87F}
+		{2A9730BC-0F53-40D7-B247-2180CE71D1FE} = {115F8AA7-8D4C-456D-A659-31C0E614A87F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {827702D0-3CC2-4508-9FC8-4E032EE67931}

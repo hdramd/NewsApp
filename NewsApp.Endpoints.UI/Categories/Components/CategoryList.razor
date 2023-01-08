@@ -1,0 +1,51 @@
+﻿@page "/categories"
+@inject ICategoryService EmployeeService
+
+<PageTitle>Category list</PageTitle>
+
+<h1>Category list</h1>
+
+<p>This component demonstrates the list of categories</p>
+
+@if (pagedData == null)
+{
+    <p><em>Loading...</em></p>
+    <p>@error</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@nameof(CategoryDto.Id)</th>
+                <th>@nameof(CategoryDto.BusinessId)</th>
+                <th>@nameof(CategoryDto.Name)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in pagedData.QueryResult)
+            {
+                <tr>
+                    <td>@category.Id</td>
+                    <td>@category.BusinessId</td>
+                    <td>@category.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private PagedData<CategoryDto> pagedData;
+    private string error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    private async Task LoadDataAsync()
+    {
+        pagedData = await EmployeeService.GetPagedListAsync();
+    }
+}

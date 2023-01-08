@@ -40,6 +40,9 @@ namespace NewsApp.Endpoints.Api
             builder.Services.AddDbContext<NewsAppQueryDbContext>(c => c.UseSqlServer(cnn));
 
             builder.Services.AddZaminApiCore("Zamin", "NewsApp");
+
+            builder.Services.AddCors();
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
@@ -108,6 +111,10 @@ namespace NewsApp.Endpoints.Api
             //app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("MiniBlog", "BlogCreated"));
 
             app.UseAuthorization();
+
+            app.UseCors(x => x.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod());
 
             app.MapControllers();
 
