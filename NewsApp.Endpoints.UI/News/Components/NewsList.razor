@@ -1,0 +1,43 @@
+﻿@page "/news"
+
+@inject Microsoft.AspNetCore.Components.NavigationManager navigation
+
+
+<PageTitle>Category list</PageTitle>
+
+<h1>Category list</h1>
+
+<p>This component demonstrates the list of news</p>
+<button class="btn btn-primary mb-2" @onclick="@(() => navigation.NavigateTo("/news/create"))">Create</button>
+
+@if (pagedData == null)
+{
+    <p><em>Loading...</em></p>
+    <p>@error</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@nameof(NewsDto.BusinessId)</th>
+                <th>@nameof(NewsDto.Titr)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in pagedData.QueryResult)
+            {
+                <tr>
+                    <td>@category.BusinessId</td>
+                    <td>@category.Titr</td>
+                    <td>
+                        <button class="btn btn-warning" @onclick="@(() => navigation.NavigateTo($"/news/update/{category.Id}"))">Update</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
