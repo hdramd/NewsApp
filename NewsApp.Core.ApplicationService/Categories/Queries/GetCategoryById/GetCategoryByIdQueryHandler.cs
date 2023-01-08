@@ -17,6 +17,6 @@ namespace NewsApp.Core.ApplicationService.Categories.Queries.GetCategoryById
 		}
 
 		public override async Task<QueryResult<CategoryDto>> Handle(GetCategoryByIdQuery query)
-			=> Result(await _categoryQueryRepository.GetByIdAsync(query));
+			=> Result(await _categoryQueryRepository.GetAsync(x => x.Id.Equals(query.Id)));
 	}
 }
