@@ -4,6 +4,7 @@ using NewsApp.Core.Contracts.News.Queries.GetByCategoryIdPagedList;
 using NewsApp.Core.Contracts.News.Queries.GetNewsByBusinessId;
 using NewsApp.Core.Contracts.News.Queries.Models;
 using NewsApp.Infra.Data.Sql.Queries.Common;
+using System.Linq.Expressions;
 using Zamin.Core.Contracts.Data.Queries;
 using Zamin.Infra.Data.Sql.Queries;
 
@@ -64,14 +65,14 @@ namespace NewsApp.Infra.Data.Sql.Queries.News
 				}).FirstOrDefault();
 		}
 
-		public async Task<NewsDto> GetByTitrAsync(string titr)
-			=> await _dbContext.News
-			.Select(x => new NewsDto
+		public async Task<NewsDto> GetAsync(Expression<Func<NewsDto, bool>> predicate)
+			=> await _dbContext.News.Select(x => new NewsDto
 			{
 				Id = x.Id,
 				BusinessId = x.BusinessId,
 				Titr = x.Titr
-			}).FirstOrDefaultAsync(x => x.Titr.Equals(titr));
+			}).FirstOrDefaultAsync(predicate);
+
 
 		public async Task<PagedData<NewsDto>> GetByCategoryIdPagedListAsync(GetByCategoryIdPagedListQuery query)
 		{

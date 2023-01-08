@@ -39,7 +39,7 @@ namespace NewsApp.Core.ApplicationService.News.Commands
 
 		private bool NotExist(string arg)
 		{
-			var news = _newsQueryRepository.GetByTitrAsync(arg)
+			var news = _newsQueryRepository.GetAsync(x => x.Titr.Equals(arg))
 				.GetAwaiter().GetResult();
 
 			return news == null;

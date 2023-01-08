@@ -1,14 +1,8 @@
 ﻿using FluentValidation;
 using NewsApp.Core.Contracts.Categories.Queries;
 using NewsApp.Core.Contracts.Images.Queries;
-using NewsApp.Core.Contracts.News.Commands.CreateNews;
 using NewsApp.Core.Contracts.News.Commands.UpdateNews;
 using NewsApp.Core.Contracts.News.Queries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Zamin.Extensions.Translations.Abstractions;
 
 namespace NewsApp.Core.ApplicationService.News.Commands.UpdateNews
@@ -48,7 +42,7 @@ namespace NewsApp.Core.ApplicationService.News.Commands.UpdateNews
 
 		private bool NotExist(UpdateNewsCommand arg)
 		{
-			var news = _newsQueryRepository.GetByTitrAsync(arg.Titr)
+			var news = _newsQueryRepository.GetAsync(x => x.Titr.Equals(arg.Titr))
 				.GetAwaiter().GetResult();
 
 			return news == null || news.Id.Equals(arg.Id);
