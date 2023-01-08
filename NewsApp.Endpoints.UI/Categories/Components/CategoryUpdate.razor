@@ -1,4 +1,4 @@
-﻿@page "/category/create"
+﻿@page "/category/update/{CategoryId}"
 <h3>CategoryCreate</h3>
 
 <div class="row">
@@ -9,7 +9,7 @@
                 <input for="Name" class="form-control" @bind="@model.Name" />
             </div>
             <div class="form-group mt-2">
-                <input type="submit" value="Create" @onclick="@Create" class="btn btn-primary" />
+                <input type="submit" value="Update" @onclick="@Update" class="btn btn-primary" />
                 <input type="submit" value="Cancel" @onclick="@Cancel" class="btn btn-light" />
             </div>
         </form>

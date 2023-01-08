@@ -8,8 +8,8 @@
 <h1>Category list</h1>
 
 <p>This component demonstrates the list of categories</p>
-<button class="btn btn-primary" @onclick="@(() => navigation.NavigateTo("/category/create"))">Create</button>
-<hr />
+<button class="btn btn-primary mb-2" @onclick="@(() => navigation.NavigateTo("/category/create"))">Create</button>
+
 @if (pagedData == null)
 {
     <p><em>Loading...</em></p>
@@ -20,18 +20,21 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>@nameof(CategoryDto.Id)</th>
                 <th>@nameof(CategoryDto.BusinessId)</th>
                 <th>@nameof(CategoryDto.Name)</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var category in pagedData.QueryResult)
             {
                 <tr>
-                    <td>@category.Id</td>
                     <td>@category.BusinessId</td>
                     <td>@category.Name</td>
+                    <td>
+                        <button class="btn btn-warning" @onclick="@(() => navigation.NavigateTo($"/category/update/{category.Id}"))">Update</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
                 </tr>
             }
         </tbody>

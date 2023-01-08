@@ -12,10 +12,19 @@ namespace NewsApp.Endpoints.UI.Categories.Services
         }
 
         public async Task<long> CreateAsync(CreateCategoryModel model)
-            => await _categoryApi.CreateAsync(model);
+            => await _categoryApi.CreateAsync(model); 
+        
+        public async Task<long> UpdateAsync(UpdateCategoryModel model)
+            => await _categoryApi.UpdateAsync(model);
 
+        public async Task<CategoryDto> GetByIdAsync(long id)
+            => await _categoryApi.GetAsync(id);
+        
         public async Task<PagedData<CategoryDto>> GetPagedListAsync()
             => await _categoryApi.GetPagedListAsync();
+        
+        public async Task DeleteAsync(long id)
+            => await _categoryApi.DeleteAsync(id);
 
     }
 }

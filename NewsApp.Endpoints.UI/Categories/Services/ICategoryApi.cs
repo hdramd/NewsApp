@@ -1,16 +1,25 @@
-﻿using NewsApp.Endpoints.Shared.Models;
+﻿using Refit;
+using NewsApp.Endpoints.Shared.Models;
 using NewsApp.Endpoints.UI.Categories.Models;
-using Refit;
 
 namespace NewsApp.Endpoints.UI.Categories.Services
 {
     [Headers("Content-Type: application/json")]
     public interface ICategoryApi
     {
-        [Post("/")]
+        [Post("/Category")]
         Task<long> CreateAsync([Body]CreateCategoryModel model); 
         
-        [Get("/GetPagedList")]
-        Task<PagedData<CategoryDto>> GetPagedListAsync();
+        [Put("/Category")]
+        Task<long> UpdateAsync([Body]UpdateCategoryModel model); 
+        
+        [Get("/Category/{id}")]
+        Task<CategoryDto> GetAsync(long id);
+        
+        [Get("/Category/GetPagedList")]
+        Task<PagedData<CategoryDto>> GetPagedListAsync(); 
+        
+        [Delete("/Category/{id}")]
+        Task DeleteAsync(long id);  
     }
 }
