@@ -19,7 +19,7 @@ namespace NewsApp.Endpoints.UI.News.Components
 
         protected override async Task OnInitializedAsync()
         {
-            var pagedData = await CategoryService.GetPagedListAsync(new PageQuery { PageSize = 1000 });
+            var pagedData = await CategoryService.GetPagedListAsync(new PageQuery { PageSize = 100 });
             categories = pagedData.QueryResult;
         }
 

@@ -108,7 +108,9 @@ namespace NewsApp.Infra.Data.Sql.Queries.News
         {
             var newsQuery = _dbContext.News;
 
-            var categoryPagedQuery = newsQuery.Skip(query.SkipCount)
+            var categoryPagedQuery = newsQuery
+                .OrderByDescending(x => x.Id)
+                .Skip(query.SkipCount)
                 .Take(query.PageSize)
                 .Select(x => new NewsDto
                 {

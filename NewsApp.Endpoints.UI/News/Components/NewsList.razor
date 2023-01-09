@@ -39,5 +39,15 @@ else
             }
         </tbody>
     </table>
+
+        <div class="row">
+        <div class="col">
+            <Pagination Spread="2"
+                    CurrentPage="@pagedData.PageNumber"
+                    PageSize="@pagedData.PageSize"
+                    TotalCount="@pagedData.TotalCount"
+                    SelectedPage="SelectedPage" />
+        </div>
+    </div>
 }
 

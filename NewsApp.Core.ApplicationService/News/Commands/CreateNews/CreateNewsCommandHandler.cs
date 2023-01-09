@@ -7,7 +7,7 @@ using Entities = NewsApp.Core.Domain.News.Entities;
 
 namespace NewsApp.Core.ApplicationService.News.Commands.CreateNews
 {
-	public class CreateNewsCommandHandler : CommandHandler<CreateNewsCommand, Guid>
+	public class CreateNewsCommandHandler : CommandHandler<CreateNewsCommand, long>
 	{
 		private readonly INewsCommandRepository _newsCommandRepository;
 		public CreateNewsCommandHandler(ZaminServices zaminServices,
@@ -16,13 +16,13 @@ namespace NewsApp.Core.ApplicationService.News.Commands.CreateNews
 			_newsCommandRepository = newsCommandRepository;
 		}
 
-		public override async Task<CommandResult<Guid>> Handle(CreateNewsCommand command)
+		public override async Task<CommandResult<long>> Handle(CreateNewsCommand command)
 		{
 			Entities.News news = Entities.News.Create(command.Titr, 
 				command.CategoryIds, command.ImageIds);
 			await _newsCommandRepository.InsertAsync(news);
 			await _newsCommandRepository.CommitAsync();
-			return Ok(news.BusinessId.Value);
+			return Ok(news.Id);
 		}
 	}
 }

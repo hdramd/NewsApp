@@ -12,7 +12,7 @@ namespace NewsApp.Endpoints.Api.Controllers.News
 	{
 		[HttpPost]
 		public async Task<IActionResult> Post([FromBody] CreateNewsCommand command)
-		   => await Create<CreateNewsCommand, Guid>(command);
+		   => await Create<CreateNewsCommand, long>(command);
 
 		[HttpPut]
 		public async Task<IActionResult> Put([FromBody] UpdateNewsCommand command)

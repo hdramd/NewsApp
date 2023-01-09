@@ -7,7 +7,7 @@ using NewsApp.Core.Contracts.Categories.Commands;
 
 namespace NewsApp.Core.ApplicationService.Categories.Commands.CreateCategory
 {
-	public class CreateCategoryCommandHandler : CommandHandler<CreateCategoryCommand, Guid>
+	public class CreateCategoryCommandHandler : CommandHandler<CreateCategoryCommand, long>
 	{
 		private readonly ICategoryCommandRepository _categoryCommandRepository;
 		public CreateCategoryCommandHandler(ZaminServices zaminServices,
@@ -16,12 +16,12 @@ namespace NewsApp.Core.ApplicationService.Categories.Commands.CreateCategory
 			_categoryCommandRepository = categoryCommandRepository;
 		}
 
-		public override async Task<CommandResult<Guid>> Handle(CreateCategoryCommand command)
+		public override async Task<CommandResult<long>> Handle(CreateCategoryCommand command)
 		{
 			var category = Category.Create(command.Name);
 			await _categoryCommandRepository.InsertAsync(category);
 			await _categoryCommandRepository.CommitAsync();
-			return Ok(category.BusinessId.Value);
+			return Ok(category.Id);
 		}
 	}
 }

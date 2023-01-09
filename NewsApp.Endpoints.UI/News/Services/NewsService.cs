@@ -20,8 +20,8 @@ namespace NewsApp.Endpoints.UI.News.Services
         public async Task<NewsDto> GetByIdAsync(long id)
             => await _newsApi.GetAsync(id);
 
-        public async Task<PagedData<NewsDto>> GetPagedListAsync()
-            => await _newsApi.GetPagedListAsync();
+        public async Task<PagedData<NewsDto>> GetPagedListAsync(PageQuery query)
+            => await _newsApi.GetPagedListAsync(query);
 
         public async Task DeleteAsync(long id)
             => await _newsApi.DeleteAsync(id);

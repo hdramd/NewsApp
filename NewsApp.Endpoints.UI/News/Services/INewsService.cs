@@ -8,7 +8,7 @@ namespace NewsApp.Endpoints.UI.News.Services
         Task<long> CreateAsync(CreateNewsModel model);
         Task<long> UpdateAsync(UpdateNewsModel model);
         Task<NewsDto> GetByIdAsync(long id);
-        Task<PagedData<NewsDto>> GetPagedListAsync();
+        Task<PagedData<NewsDto>> GetPagedListAsync(PageQuery query);
         Task DeleteAsync(long id);
     }
 }

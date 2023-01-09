@@ -2,7 +2,7 @@
 
 namespace NewsApp.Core.Contracts.News.Commands.CreateNews
 {
-    public class CreateNewsCommand : ICommand<Guid>
+    public class CreateNewsCommand : ICommand<long>
     {
         public string Titr { get; set; }
         public long[] CategoryIds { get; set; }

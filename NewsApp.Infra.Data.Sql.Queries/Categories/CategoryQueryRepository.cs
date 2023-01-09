@@ -9,50 +9,52 @@ using Zamin.Infra.Data.Sql.Queries;
 
 namespace NewsApp.Infra.Data.Sql.Queries.Categories
 {
-	public class CategoryQueryRepository : BaseQueryRepository<NewsAppQueryDbContext>, ICategoryQueryRepository
-	{
-		public CategoryQueryRepository(NewsAppQueryDbContext dbContext) : base(dbContext)
-		{
-		}
+    public class CategoryQueryRepository : BaseQueryRepository<NewsAppQueryDbContext>, ICategoryQueryRepository
+    {
+        public CategoryQueryRepository(NewsAppQueryDbContext dbContext) : base(dbContext)
+        {
+        }
 
-		public async Task<CategoryDto> GetAsync(Expression<Func<CategoryDto, bool>> predicate)
-			=> await _dbContext.Categories.Select(x => new CategoryDto
-			{
-				Id = x.Id,
-				BusinessId = x.BusinessId,
-				Name = x.Name
-			}).FirstOrDefaultAsync(predicate);
+        public async Task<CategoryDto> GetAsync(Expression<Func<CategoryDto, bool>> predicate)
+            => await _dbContext.Categories.Select(x => new CategoryDto
+            {
+                Id = x.Id,
+                BusinessId = x.BusinessId,
+                Name = x.Name
+            }).FirstOrDefaultAsync(predicate);
 
-		public async Task<List<CategoryDto>> GetByIdAsync(List<long> ids)
-			=> await _dbContext.Categories
-				.Where(x => ids.Contains(x.Id))
-				.Select(x => new CategoryDto
-				{
-					Id = x.Id,
-					BusinessId = x.BusinessId,
-					Name = x.Name
-				}).ToListAsync();
+        public async Task<List<CategoryDto>> GetByIdAsync(List<long> ids)
+            => await _dbContext.Categories
+                .Where(x => ids.Contains(x.Id))
+                .Select(x => new CategoryDto
+                {
+                    Id = x.Id,
+                    BusinessId = x.BusinessId,
+                    Name = x.Name
+                }).ToListAsync();
 
-		public async Task<PagedData<CategoryDto>> GetPagedListAsync(GetCategoryPagedListQuery query)
-		{
-			var categoryQuery = _dbContext.Categories;
+        public async Task<PagedData<CategoryDto>> GetPagedListAsync(GetCategoryPagedListQuery query)
+        {
+            var categoryQuery = _dbContext.Categories;
 
-			var categoryPagedQuery = categoryQuery.Skip(query.SkipCount)
-				.Take(query.PageSize)
-				.Select(x => new CategoryDto
-				{
-					Id = x.Id,
-					BusinessId = x.BusinessId,
-					Name = x.Name
-				});
+            var categoryPagedQuery = categoryQuery
+                .OrderByDescending(x => x.Id)
+                .Skip(query.SkipCount)
+                .Take(query.PageSize)
+                .Select(x => new CategoryDto
+                {
+                    Id = x.Id,
+                    BusinessId = x.BusinessId,
+                    Name = x.Name
+                });
 
-			return new PagedData<CategoryDto>
-			{
-				PageNumber = query.PageNumber,
-				PageSize = query.PageSize,
-				QueryResult = await categoryPagedQuery.ToListAsync(),
-				TotalCount = await categoryQuery.CountAsync()
-			};
-		}
-	}
+            return new PagedData<CategoryDto>
+            {
+                PageNumber = query.PageNumber,
+                PageSize = query.PageSize,
+                QueryResult = await categoryPagedQuery.ToListAsync(),
+                TotalCount = await categoryQuery.CountAsync()
+            };
+        }
+    }
 }

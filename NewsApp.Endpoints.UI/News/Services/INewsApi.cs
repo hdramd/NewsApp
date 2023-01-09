@@ -17,7 +17,7 @@ namespace NewsApp.Endpoints.UI.News.Services
         Task<NewsDto> GetAsync(long id);
 
         [Get("/News/GetPagedList")]
-        Task<PagedData<NewsDto>> GetPagedListAsync();
+        Task<PagedData<NewsDto>> GetPagedListAsync(PageQuery query);
 
         [Delete("/News/{id}")]
         Task DeleteAsync(long id);

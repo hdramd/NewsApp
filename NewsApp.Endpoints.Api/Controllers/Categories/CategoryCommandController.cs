@@ -12,12 +12,12 @@ namespace NewsApp.Endpoints.Api.Controllers.Categories
 	{
 		[HttpPost]
 		public async Task<IActionResult> Post(CreateCategoryCommand command)
-			=> await Create<CreateCategoryCommand, Guid>(command);
+			=> await Create<CreateCategoryCommand, long>(command);
 
 		[Obsolete]
 		[HttpPost(nameof(Create))]
 		public async Task<IActionResult> Create(CreateCategoryCommand command)
-			=> await Create<CreateCategoryCommand, Guid>(command);
+			=> await Create<CreateCategoryCommand, long>(command);
 
 		[HttpPut]
 		public async Task<IActionResult> Put(UpdateCategoryCommand command)

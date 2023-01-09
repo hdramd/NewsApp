@@ -9,8 +9,8 @@ namespace NewsApp.Endpoints.UI.News.Components
     {
         private PagedData<NewsDto> pagedData;
         private readonly string error;
+        PageQuery pageQuery = new();
         [Inject] INewsService NewsService { get; set; }
-
 
         protected override async Task OnInitializedAsync()
         {
@@ -19,7 +19,13 @@ namespace NewsApp.Endpoints.UI.News.Components
 
         private async Task LoadDataAsync()
         {
-            pagedData = await NewsService.GetPagedListAsync();
+            pagedData = await NewsService.GetPagedListAsync(pageQuery);
+        }
+
+        private async Task SelectedPage(int page)
+        {
+            pageQuery.PageNumber = page;
+            await LoadDataAsync();
         }
     }
 }
