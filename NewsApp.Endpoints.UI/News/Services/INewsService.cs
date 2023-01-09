@@ -5,10 +5,10 @@ namespace NewsApp.Endpoints.UI.News.Services
 {
     public interface INewsService
     {
-        Task<long> CreateAsync(CreateNewsModel model);
-        Task<long> UpdateAsync(UpdateNewsModel model);
-        Task<NewsDto> GetByIdAsync(long id);
-        Task<PagedData<NewsDto>> GetPagedListAsync(PageQuery query);
-        Task DeleteAsync(long id);
+        Task<ApiResult<long>> CreateAsync(CreateNewsModel model);
+        Task<ApiResult<long>> UpdateAsync(UpdateNewsModel model);
+        Task<ApiResult<NewsDto>> GetByIdAsync(long id);
+        Task<ApiResult<PagedData<NewsDto>>> GetPagedListAsync(PageQuery query);
+        Task<ApiResult> DeleteAsync(long id);
     }
 }

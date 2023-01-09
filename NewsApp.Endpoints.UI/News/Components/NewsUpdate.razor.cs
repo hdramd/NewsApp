@@ -22,8 +22,11 @@ namespace NewsApp.Endpoints.UI.News.Components
         protected override async Task OnInitializedAsync()
         {
             if (long.TryParse(NewsId, out long id) == false) return;
-            var news = await NewsService.GetByIdAsync(id);
-            MapToModel(news);
+            var newsResult = await NewsService.GetByIdAsync(id);
+            if (newsResult.Succeeded == false)
+                ErrorMessage = newsResult.ErrorMessage;
+            else
+                MapToModel(newsResult.Data);
 
             var result = await CategoryService.GetPagedListAsync(new PageQuery { PageSize = 1000 });
             if (result.Succeeded == false)
@@ -44,8 +47,11 @@ namespace NewsApp.Endpoints.UI.News.Components
         {
             model.CategoryIds = SelectedCategories.Select(x => Convert.ToInt64(x))
                 .ToArray();
-            await NewsService.UpdateAsync(model);
-            NavigationManager.NavigateTo("/news");
+            var result = await NewsService.UpdateAsync(model);
+            if (result.Succeeded == false)
+                ErrorMessage = result.ErrorMessage;
+            else
+                NavigationManager.NavigateTo("/news");
         }
 
         void Cancel()

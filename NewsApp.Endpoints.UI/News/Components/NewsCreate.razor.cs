@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using NewsApp.Endpoints.Shared.Components;
 using NewsApp.Endpoints.Shared.Models;
 using NewsApp.Endpoints.UI.Categories.Models;
 using NewsApp.Endpoints.UI.Categories.Services;
@@ -32,8 +31,11 @@ namespace NewsApp.Endpoints.UI.News.Components
         {
             model.CategoryIds = SelectedCategories.Select(x => Convert.ToInt64(x))
                 .ToArray();
-            await NewsService.CreateAsync(model);
-            NavigationManager.NavigateTo("/news");
+            var result = await NewsService.CreateAsync(model);
+            if (result.Succeeded == false)
+                ErrorMessage = result.ErrorMessage;
+            else
+                NavigationManager.NavigateTo("/news");
         }
 
         void Cancel()

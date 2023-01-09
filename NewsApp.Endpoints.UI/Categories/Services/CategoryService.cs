@@ -22,8 +22,7 @@ namespace NewsApp.Endpoints.UI.Categories.Services
             }
             catch (ApiException ex)
             {
-                var errors = await ex.GetContentAsAsync<string[]>();
-                return ApiResult.Failed<long>(errors.First());
+                return await FailedResult<long>(ex);
             }
         }
 
