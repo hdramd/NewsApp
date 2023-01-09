@@ -33,7 +33,7 @@ else
                     <td>@category.Name</td>
                     <td>
                         <button class="btn btn-warning" @onclick="@(() => navigation.NavigateTo($"/category/update/{category.Id}"))">Update</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-danger" @onclick="() => Delete(category.Id)">Delete</button>
                     </td>
                 </tr>
             }

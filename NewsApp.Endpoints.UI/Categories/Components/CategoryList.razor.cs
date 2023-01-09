@@ -2,6 +2,7 @@
 using NewsApp.Endpoints.Shared.Models;
 using NewsApp.Endpoints.UI.Categories.Models;
 using NewsApp.Endpoints.UI.Categories.Services;
+using NewsApp.Endpoints.UI.News.Services;
 
 namespace NewsApp.Endpoints.UI.Categories.Components
 {
@@ -31,6 +32,15 @@ namespace NewsApp.Endpoints.UI.Categories.Components
         {
             pageQuery.PageNumber = page;
             await LoadDataAsync();
+        }
+
+        private async Task Delete(long id)
+        {
+            var result = await CategoryService.DeleteAsync(id);
+            if (result.Succeeded == false)
+                ErrorMessage = result.ErrorMessage;
+            else
+                await LoadDataAsync();
         }
     }
 }
