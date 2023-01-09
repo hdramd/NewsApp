@@ -31,5 +31,14 @@ namespace NewsApp.Endpoints.UI.News.Components
             pageQuery.PageNumber = page;
             await LoadDataAsync();
         }
+
+        private async Task Delete(long id)
+        {
+            var result = await NewsService.DeleteAsync(id);
+            if (result.Succeeded == false)
+                ErrorMessage = result.ErrorMessage;
+            else
+                await LoadDataAsync();
+        }
     }
 }

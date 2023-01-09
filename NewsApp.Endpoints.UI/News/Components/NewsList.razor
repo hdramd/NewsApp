@@ -3,11 +3,11 @@
 @inject Microsoft.AspNetCore.Components.NavigationManager navigation
 
 
-<PageTitle>Category list</PageTitle>
+<PageTitle>news list</PageTitle>
 
 <ErrorMessage Message="@ErrorMessage"></ErrorMessage>
 
-<h1>Category list</h1>
+<h1>news list</h1>
 
 <p>This component demonstrates the list of news</p>
 <button class="btn btn-primary mb-2" @onclick="@(() => navigation.NavigateTo("/news/create"))">Create</button>
@@ -27,21 +27,21 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var category in pagedData.QueryResult)
+            @foreach (var news in pagedData.QueryResult)
             {
                 <tr>
-                    <td>@category.BusinessId</td>
-                    <td>@category.Titr</td>
+                    <td>@news.BusinessId</td>
+                    <td>@news.Titr</td>
                     <td>
-                        <button class="btn btn-warning" @onclick="@(() => navigation.NavigateTo($"/news/update/{category.Id}"))">Update</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-warning" @onclick="@(() => navigation.NavigateTo($"/news/update/{news.Id}"))">Update</button>
+                        <button class="btn btn-danger" @onclick="() => Delete(news.Id)">Delete</button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 
-        <div class="row">
+    <div class="row">
         <div class="col">
             <Pagination Spread="2"
                     CurrentPage="@pagedData.PageNumber"

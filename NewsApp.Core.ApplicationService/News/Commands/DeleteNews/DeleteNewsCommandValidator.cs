@@ -14,14 +14,8 @@ namespace NewsApp.Core.ApplicationService.News.Commands.DeleteNews
 			_categoryQueryRepository= categoryQueryRepository;
 
 			RuleFor(x => x.Id)
-				.NotNull().NotEmpty().WithMessage(translator["Required", "Id"])
-				.Must(NotUsed).WithMessage(translator["This category is used in atleast one news."]);
+				.NotNull().NotEmpty().WithMessage(translator["Required", "Id"]); ;
 				
-		}
-
-		private bool NotUsed(long id)
-		{
-			return false;
 		}
 	}
 }
