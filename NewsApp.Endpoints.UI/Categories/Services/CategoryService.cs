@@ -1,10 +1,12 @@
 ﻿using NewsApp.Endpoints.Shared.Models;
+using NewsApp.Endpoints.Shared.Services;
 using NewsApp.Endpoints.UI.Categories.Models;
 using Refit;
+using System.Reflection;
 
 namespace NewsApp.Endpoints.UI.Categories.Services
 {
-    public class CategoryService : ICategoryService
+    public class CategoryService : ServiceBase, ICategoryService
     {
         private readonly ICategoryApi _categoryApi;
         public CategoryService(ICategoryApi categoryApi)
@@ -17,26 +19,66 @@ namespace NewsApp.Endpoints.UI.Categories.Services
             try
             {
                 var categoryId = await _categoryApi.CreateAsync(model);
-                return new ApiResult<long> { Succeeded = true, Data = categoryId };
+                return ApiResult.Successfull(categoryId);
             }
             catch (ApiException ex)
             {
                 var errors = await ex.GetContentAsAsync<string[]>();
-                return new ApiResult<long> { ErrorMessage = errors[0] };
+                return ApiResult.Failed<long>(errors.First());
             }
         }
 
-        public async Task<long> UpdateAsync(UpdateCategoryModel model)
-            => await _categoryApi.UpdateAsync(model);
+        public async Task<ApiResult<long>> UpdateAsync(UpdateCategoryModel model)
+        {
+            try
+            {
+                var categoryId = await _categoryApi.UpdateAsync(model);
+                return ApiResult.Successfull(categoryId);
+            }
+            catch (ApiException ex)
+            {
+                return await FailedResult<long>(ex);
+            }
+        }
 
-        public async Task<CategoryDto> GetByIdAsync(long id)
-            => await _categoryApi.GetAsync(id);
+        public async Task<ApiResult<CategoryDto>> GetByIdAsync(long id)
+        {
+            try
+            {
+                var category = await _categoryApi.GetAsync(id);
+                return ApiResult.Successfull(category);
+            }
+            catch (ApiException ex)
+            {
+                return await FailedResult<CategoryDto>(ex);
+            }
+        }
 
-        public async Task<PagedData<CategoryDto>> GetPagedListAsync(PageQuery query)
-            => await _categoryApi.GetPagedListAsync(query);
+        public async Task<ApiResult<PagedData<CategoryDto>>> GetPagedListAsync(PageQuery query)
+        {
+            try
+            {
+                var data = await _categoryApi.GetPagedListAsync(query);
+                return ApiResult.Successfull(data);
+            }
+            catch (ApiException ex)
+            {
+                return await FailedResult<PagedData<CategoryDto>>(ex);
+            }
+        }
 
-        public async Task DeleteAsync(long id)
-            => await _categoryApi.DeleteAsync(id);
+        public async Task<ApiResult> DeleteAsync(long id)
+        {
+            try
+            {
+                await _categoryApi.DeleteAsync(id);
+                return ApiResult.Successfull();
+            }
+            catch (ApiException ex)
+            {
+                return await FailedResult(ex);
+            }
+        }
 
     }
 }

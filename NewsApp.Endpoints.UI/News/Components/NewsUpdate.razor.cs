@@ -13,6 +13,7 @@ namespace NewsApp.Endpoints.UI.News.Components
         public string NewsId { get; set; }
         List<CategoryDto> categories = new();
         UpdateNewsModel model = new();
+        string ErrorMessage;
         string[] SelectedCategories { get; set; } = Array.Empty<string>();
         [Inject] NavigationManager NavigationManager { get; set; }
         [Inject] INewsService NewsService { get; set; }
@@ -24,8 +25,11 @@ namespace NewsApp.Endpoints.UI.News.Components
             var news = await NewsService.GetByIdAsync(id);
             MapToModel(news);
 
-            var pagedData = await CategoryService.GetPagedListAsync(new PageQuery { PageSize = 1000 });
-            categories = pagedData.QueryResult;
+            var result = await CategoryService.GetPagedListAsync(new PageQuery { PageSize = 1000 });
+            if (result.Succeeded == false)
+                ErrorMessage = result.ErrorMessage;
+            else
+                categories = result.Data.QueryResult;
         }
 
         private void MapToModel(NewsDto news)

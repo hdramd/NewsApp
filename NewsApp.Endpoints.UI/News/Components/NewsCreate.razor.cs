@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using NewsApp.Endpoints.Shared.Components;
 using NewsApp.Endpoints.Shared.Models;
 using NewsApp.Endpoints.UI.Categories.Models;
 using NewsApp.Endpoints.UI.Categories.Services;
@@ -11,6 +12,7 @@ namespace NewsApp.Endpoints.UI.News.Components
     {
         CreateNewsModel model = new();
         List<CategoryDto> categories = new();
+        string ErrorMessage;
         [Inject] NavigationManager NavigationManager { get; set; }
         [Inject] INewsService NewsService { get; set; }
         [Inject] ICategoryService CategoryService { get; set; }
@@ -19,8 +21,11 @@ namespace NewsApp.Endpoints.UI.News.Components
 
         protected override async Task OnInitializedAsync()
         {
-            var pagedData = await CategoryService.GetPagedListAsync(new PageQuery { PageSize = 100 });
-            categories = pagedData.QueryResult;
+            var result = await CategoryService.GetPagedListAsync(new PageQuery { PageSize = 100 });
+            if (result.Succeeded == false)
+                ErrorMessage = result.ErrorMessage;
+            else
+                categories = result.Data.QueryResult;
         }
 
         protected async Task Create()

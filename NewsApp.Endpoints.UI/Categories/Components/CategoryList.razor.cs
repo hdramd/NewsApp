@@ -8,7 +8,7 @@ namespace NewsApp.Endpoints.UI.Categories.Components
     public partial class CategoryList
     {
         private PagedData<CategoryDto> pagedData;
-        private readonly string error;
+        private string ErrorMessage;
         PageQuery pageQuery = new();
         [Inject] ICategoryService CategoryService { get; set; }
 
@@ -19,7 +19,12 @@ namespace NewsApp.Endpoints.UI.Categories.Components
 
         private async Task LoadDataAsync()
         {
-            pagedData = await CategoryService.GetPagedListAsync(pageQuery);
+            var result = await CategoryService.GetPagedListAsync(pageQuery);
+
+            if (result.Succeeded == false)
+                ErrorMessage = result.ErrorMessage;
+            else
+                pagedData = result.Data;
         }
 
         private async Task SelectedPage(int page)

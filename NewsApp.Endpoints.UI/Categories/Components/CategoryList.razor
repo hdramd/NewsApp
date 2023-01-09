@@ -6,13 +6,14 @@
 
 <h1>Category list</h1>
 
+<ErrorMessage Message="@ErrorMessage"></ErrorMessage>
+
 <p>This component demonstrates the list of categories</p>
 <button class="btn btn-primary mb-2" @onclick="@(() => navigation.NavigateTo("/category/create"))">Create</button>
 
 @if (pagedData == null)
 {
     <p><em>Loading...</em></p>
-    <p>@error</p>
 }
 else
 {

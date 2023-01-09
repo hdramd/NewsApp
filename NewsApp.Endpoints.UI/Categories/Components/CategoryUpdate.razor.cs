@@ -8,7 +8,7 @@ namespace NewsApp.Endpoints.UI.Categories.Components
     {
         [Parameter]
         public string CategoryId { get; set; }
-
+        string ErrorMessage;
         UpdateCategoryModel model = new();
         [Inject] NavigationManager NavigationManager { get; set; }
         [Inject] ICategoryService CategoryService { get; set; }
@@ -16,8 +16,11 @@ namespace NewsApp.Endpoints.UI.Categories.Components
         protected override async Task OnInitializedAsync()
         {
             if (long.TryParse(CategoryId, out long id) == false) return;
-            var category = await CategoryService.GetByIdAsync(id);
-            MapToModel(category);
+            var result = await CategoryService.GetByIdAsync(id);
+            if (result.Succeeded == false)
+                ErrorMessage = result.ErrorMessage;
+            else
+                MapToModel(result.Data);
         }
 
         private void MapToModel(CategoryDto category)
