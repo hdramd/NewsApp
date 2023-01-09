@@ -14,7 +14,7 @@ namespace NewsApp.Endpoints.UI.News.Components
         [Inject] INewsService NewsService { get; set; }
         [Inject] ICategoryService CategoryService { get; set; }
 
-        string selectedCategory;
+        public string[] SelectedCategories { get; set; } = Array.Empty<string>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -24,8 +24,8 @@ namespace NewsApp.Endpoints.UI.News.Components
 
         protected async Task Create()
         {
-            model.CategoryIds = model.CategoryIds ?? new long[1];
-            model.CategoryIds[0] = Convert.ToInt64(selectedCategory);
+            model.CategoryIds = SelectedCategories.Select(x => Convert.ToInt64(x))
+                .ToArray();
             await NewsService.CreateAsync(model);
             NavigationManager.NavigateTo("/news");
         }

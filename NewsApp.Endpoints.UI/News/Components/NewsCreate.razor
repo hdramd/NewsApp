@@ -7,8 +7,9 @@
             <label for="Name" class="control-label">@nameof(CreateNewsModel.Titr)</label>
             <input for="Name" class="form-control" @bind="@model.Titr" />
         </div>
-        <div class="form-group">
-            <select class="form-select" aria-label="Select category" @bind="@selectedCategory">
+        <div class="form-group mt-2">
+            <label for="Name" class="control-label">Category</label>
+            <select class="form-select" aria-label="Select category" @bind="@SelectedCategories" multiple>
                 @foreach (var category in categories)
                 {
                     <option value="@category.Id">@category.Name</option>

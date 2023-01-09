@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NewsApp.Core.Contracts.Categories.Queries.Models;
 using NewsApp.Core.Contracts.News.Queries;
 using NewsApp.Core.Contracts.News.Queries.GetByCategoryIdPagedList;
 using NewsApp.Core.Contracts.News.Queries.GetNewsByBusinessId;
@@ -35,6 +36,7 @@ namespace NewsApp.Infra.Data.Sql.Queries.News
                     (temp, cat) => new
                     {
                         temp.NewsId,
+                        CategoryId = cat.Id,
                         CategoryName = cat.Name
                     });
 
@@ -49,7 +51,8 @@ namespace NewsApp.Infra.Data.Sql.Queries.News
                                  news.BusinessId,
                                  news.Titr,
                                  newsImage.ImagePath,
-                                 newsCategory.CategoryName
+                                 newsCategory.CategoryId,
+                                 newsCategory.CategoryName,
                              };
 
             var result = await finalQuery.Where(x => x.Id.Equals(query.Id))
@@ -62,7 +65,8 @@ namespace NewsApp.Infra.Data.Sql.Queries.News
                     BusinessId = x.First().BusinessId,
                     Titr = x.First().Titr,
                     Images = x.Select(x => x.ImagePath).ToArray(),
-                    Categories = x.Select(c => c.CategoryName).ToArray()
+                    Categories = x.Select(c => new CategoryDto { Id = c.CategoryId, Name = c.CategoryName })
+                    .ToList()
                 }).FirstOrDefault();
         }
 

@@ -1,5 +1,24 @@
-﻿<h3>NewsUpdate</h3>
+﻿@page "/news/update/{NewsId}"
+<h3>CategoryCreate</h3>
 
-@code {
-
-}
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="Name" class="control-label">Name</label>
+            <input for="Name" class="form-control" @bind="@model.Titr" />
+        </div>
+        <div class="form-group mt-2">
+            <label for="Name" class="control-label">Category</label>
+            <select class="form-select" aria-label="Select category" @bind="@SelectedCategories" multiple>
+                @foreach (var category in categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <input type="button" value="Update" @onclick="@Update" class="btn btn-primary" />
+            <input type="button" value="Cancel" @onclick="@Cancel" class="btn btn-light" />
+        </div>
+    </div>
+</div>
