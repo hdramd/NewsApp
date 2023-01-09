@@ -31,8 +31,11 @@ namespace NewsApp.Endpoints.UI.Categories.Components
 
         protected async Task Update()
         {
-            await CategoryService.UpdateAsync(model);
-            NavigationManager.NavigateTo("/category");
+            var result = await CategoryService.UpdateAsync(model);
+            if (result.Succeeded == false)
+                ErrorMessage = result.ErrorMessage;
+            else
+                NavigationManager.NavigateTo("/category");
         }
 
         void Cancel()

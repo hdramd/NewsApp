@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace NewsApp.Endpoints.Shared.Models
+﻿namespace NewsApp.Endpoints.Shared.Models
 {
     public class ApiResult
     {
@@ -28,7 +26,6 @@ namespace NewsApp.Endpoints.Shared.Models
                 ErrorMessage = errorMessage
             };
         }
-
     }
 
     public class ApiResult<TData>

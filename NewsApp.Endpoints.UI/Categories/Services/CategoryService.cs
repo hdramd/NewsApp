@@ -2,7 +2,6 @@
 using NewsApp.Endpoints.Shared.Services;
 using NewsApp.Endpoints.UI.Categories.Models;
 using Refit;
-using System.Reflection;
 
 namespace NewsApp.Endpoints.UI.Categories.Services
 {
