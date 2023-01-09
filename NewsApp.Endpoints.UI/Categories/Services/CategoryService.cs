@@ -1,5 +1,6 @@
 ﻿using NewsApp.Endpoints.Shared.Models;
 using NewsApp.Endpoints.UI.Categories.Models;
+using Refit;
 
 namespace NewsApp.Endpoints.UI.Categories.Services
 {
@@ -11,8 +12,19 @@ namespace NewsApp.Endpoints.UI.Categories.Services
             _categoryApi = categoryApi;
         }
 
-        public async Task<long> CreateAsync(CreateCategoryModel model)
-            => await _categoryApi.CreateAsync(model);
+        public async Task<ApiResult<long>> CreateAsync(CreateCategoryModel model)
+        {
+            try
+            {
+                var categoryId = await _categoryApi.CreateAsync(model);
+                return new ApiResult<long> { Succeeded = true, Data = categoryId };
+            }
+            catch (ApiException ex)
+            {
+                var errors = await ex.GetContentAsAsync<string[]>();
+                return new ApiResult<long> { ErrorMessage = errors[0] };
+            }
+        }
 
         public async Task<long> UpdateAsync(UpdateCategoryModel model)
             => await _categoryApi.UpdateAsync(model);

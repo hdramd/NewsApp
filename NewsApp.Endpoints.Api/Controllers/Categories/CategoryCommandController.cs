@@ -7,20 +7,19 @@ using Zamin.EndPoints.Web.Controllers;
 namespace NewsApp.Endpoints.Api.Controllers.Categories
 {
 	[Route("api/Category")]
-	[ApiController]
 	public class CategoryCommandController : BaseController
 	{
 		[HttpPost]
-		public async Task<IActionResult> Post(CreateCategoryCommand command)
+		public async Task<IActionResult> Post([FromBody]CreateCategoryCommand command)
 			=> await Create<CreateCategoryCommand, long>(command);
 
 		[Obsolete]
 		[HttpPost(nameof(Create))]
-		public async Task<IActionResult> Create(CreateCategoryCommand command)
+		public async Task<IActionResult> Create([FromBody]CreateCategoryCommand command)
 			=> await Create<CreateCategoryCommand, long>(command);
 
 		[HttpPut]
-		public async Task<IActionResult> Put(UpdateCategoryCommand command)
+		public async Task<IActionResult> Put([FromBody]UpdateCategoryCommand command)
 			=> await Edit<UpdateCategoryCommand, long>(command);
 
 		[HttpDelete("{id}")]

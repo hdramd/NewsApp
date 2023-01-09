@@ -7,7 +7,6 @@ using Zamin.EndPoints.Web.Controllers;
 namespace NewsApp.Endpoints.Api.Controllers.News
 {
 	[Route("api/News")]
-	[ApiController]
 	public class NewsCommandController : BaseController
 	{
 		[HttpPost]

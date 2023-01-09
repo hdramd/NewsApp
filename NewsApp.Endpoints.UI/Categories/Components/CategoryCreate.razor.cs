@@ -7,14 +7,18 @@ namespace NewsApp.Endpoints.UI.Categories.Components
     public partial class CategoryCreate
     {
         CreateCategoryModel model = new();
+        string errorMessage = string.Empty;
         [Inject] NavigationManager NavigationManager { get; set; }
         [Inject] ICategoryService CategoryService { get; set; }
 
 
         protected async Task Create()
         {
-            await CategoryService.CreateAsync(model);
-            NavigationManager.NavigateTo("/category");
+            var result = await CategoryService.CreateAsync(model);
+            if (result.Succeeded)
+                NavigationManager.NavigateTo("/category");
+            else
+                errorMessage = result.ErrorMessage;
         }
 
         void Cancel()
