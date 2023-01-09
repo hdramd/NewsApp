@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using NewsApp.Endpoints.Shared.Models;
 using NewsApp.Endpoints.UI.Categories.Models;
 using NewsApp.Endpoints.UI.Categories.Services;
 using NewsApp.Endpoints.UI.News.Models;
@@ -23,7 +24,7 @@ namespace NewsApp.Endpoints.UI.News.Components
             var news = await NewsService.GetByIdAsync(id);
             MapToModel(news);
 
-            var pagedData = await CategoryService.GetPagedListAsync();
+            var pagedData = await CategoryService.GetPagedListAsync(new PageQuery { PageSize = 1000 });
             categories = pagedData.QueryResult;
         }
 

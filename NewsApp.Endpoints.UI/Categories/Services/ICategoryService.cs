@@ -8,7 +8,7 @@ namespace NewsApp.Endpoints.UI.Categories.Services
         Task<long> CreateAsync(CreateCategoryModel model);
         Task<long> UpdateAsync(UpdateCategoryModel model);
         Task<CategoryDto> GetByIdAsync(long id);
-        Task<PagedData<CategoryDto>> GetPagedListAsync();
+        Task<PagedData<CategoryDto>> GetPagedListAsync(PageQuery query);
         Task DeleteAsync(long id);
     }
 }

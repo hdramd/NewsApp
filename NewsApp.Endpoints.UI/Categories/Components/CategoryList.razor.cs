@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using NewsApp.Endpoints.Shared.Models;
 using NewsApp.Endpoints.UI.Categories.Models;
+using NewsApp.Endpoints.UI.Categories.Services;
 
 namespace NewsApp.Endpoints.UI.Categories.Components
 {
@@ -8,7 +9,8 @@ namespace NewsApp.Endpoints.UI.Categories.Components
     {
         private PagedData<CategoryDto> pagedData;
         private readonly string error;
-
+        PageQuery pageQuery = new();
+        [Inject] ICategoryService CategoryService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -17,7 +19,13 @@ namespace NewsApp.Endpoints.UI.Categories.Components
 
         private async Task LoadDataAsync()
         {
-            pagedData = await EmployeeService.GetPagedListAsync();
+            pagedData = await CategoryService.GetPagedListAsync(pageQuery);
+        }
+
+        private async Task SelectedPage(int page)
+        {
+            pageQuery.PageNumber = page;
+            await LoadDataAsync();
         }
     }
 }

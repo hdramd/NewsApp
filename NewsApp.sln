@@ -23,9 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsApp.Endpoints.Api", "Ne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsApp.Infra.Data.Sql.Queries", "NewsApp.Infra.Data.Sql.Queries\NewsApp.Infra.Data.Sql.Queries.csproj", "{1DA78152-C6E3-4F85-82F3-E808A1699961}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsApp.Endpoints.UI", "NewsApp.Endpoints.UI\NewsApp.Endpoints.UI.csproj", "{2FF08B41-FB38-4A0A-B873-308B7FBC45AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsApp.Endpoints.UI", "NewsApp.Endpoints.UI\NewsApp.Endpoints.UI.csproj", "{2FF08B41-FB38-4A0A-B873-308B7FBC45AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsApp.Endpoints.Shared", "NewsApp.Endpoints.Shared\NewsApp.Endpoints.Shared.csproj", "{2A9730BC-0F53-40D7-B247-2180CE71D1FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsApp.Endpoints.Shared", "NewsApp.Endpoints.Shared\NewsApp.Endpoints.Shared.csproj", "{2A9730BC-0F53-40D7-B247-2180CE71D1FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
